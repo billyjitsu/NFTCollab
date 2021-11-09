@@ -14,9 +14,9 @@ contract HiveCollabNFT is ERC721Enumerable, Ownable {
   string public baseURI;
   string public baseExtension = ".json";
   string public notRevealedUri;
-  uint256 public cost = .001 ether;
+  uint256 public cost = .1 ether;
   uint256 public maxSupply = 1000;
-  uint256 public maxMintAmount = 100;
+  uint256 public maxMintAmount = 150;
   uint256 public nftPerAddressLimit = 20;
   uint256 private seed; //seed used to randomize winner
   bool public paused = false;
@@ -63,17 +63,19 @@ contract HiveCollabNFT is ERC721Enumerable, Ownable {
       /*----adding in random reward system -----*/
       uint256 randomNumber = (block.difficulty + block.timestamp + seed) % 100;
       seed = randomNumber;
+         //if(msg.sender != owner()) {
+            if (randomNumber < 5) {
+                console.log("%s won!", msg.sender);
+                uint256 prizeAmount = 0.05 ether;
+                require(prizeAmount <= address(this).balance, "Trying to withdraw more money than they contract has.");
+                (bool success, ) = (msg.sender).call{value: prizeAmount}("");
+                require(success, "Failed to withdraw money from contract.");
 
-        if (randomNumber < 50) {
-            console.log("%s won!", msg.sender);
-            uint256 prizeAmount = 0.001 ether;
-            require(prizeAmount <= address(this).balance, "Trying to withdraw more money than they contract has.");
-            (bool success, ) = (msg.sender).call{value: prizeAmount}("");
-            require(success, "Failed to withdraw money from contract.");
-
-            //emit event of winning
-            emit WinningMint(msg.sender, prizeAmount);
-        }
+                //emit event of winning
+                emit WinningMint(msg.sender, prizeAmount);
+            }
+        
+        //}
       /* ----------------------------*/
       
     }

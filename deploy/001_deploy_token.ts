@@ -11,7 +11,7 @@ const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
     from: deployer,
     args: ["Mystery Agave Mint",
     "MYSA", 
-    "ipfs://QmWXza1Wx4WAiuyuWKh4LjT3oGLveLxdAtaDnWbhyMDYzY/", 
+    "ipfs://Qmb2vyKLB7eRgnjhs4PVhD1jRNpmLmdBCNcikfeJwT188g/", 
     "ipfs://QmWFbcEmC9PFaWWjDvincjacEm32pak8vT272Zwy98pMkV/1.json"],
     log: true,
   });
