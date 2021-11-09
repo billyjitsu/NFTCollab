@@ -17,7 +17,7 @@ const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
   });
 
   
-  deployments.execute('HiveCollabNFT', {
+  await deployments.execute('HiveCollabNFT', {
     from: deployer,
     log: true
   },
